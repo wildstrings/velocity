@@ -52,6 +52,8 @@ defmodule Velocity do
 
   @time_period_keys Map.keys(@time_periods)
 
+  def start_link(), do: start_link([])
+
   def start_link(opts) do
     {ttl, _} = Keyword.pop(opts, :ttl, 5 * 60)
     {default_period, _} = Keyword.pop(opts, :default_period, :minute)

@@ -1,13 +1,14 @@
 defmodule Velocity.Mixfile do
   use Mix.Project
 
-  @vsn "0.0.1"
+  @vsn "0.1.0"
 
   def project do
     [
       app: :velocity,
       name: "Velocity",
       description: "Event frequency tracker",
+      licenses: ["MIT"],
       source_url: "https://github.com/wildstrings/velocity",
       version: @vsn,
       elixir: "~> 1.4",

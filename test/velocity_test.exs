@@ -9,6 +9,7 @@ defmodule VelocityTest do
 
     assert Velocity.of(:foo) == 2
     assert Velocity.of(:bar) == 0
+    assert Velocity.of(:baz) == 0
 
     :timer.sleep(1000)
 
