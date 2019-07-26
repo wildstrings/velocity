@@ -31,7 +31,6 @@ defmodule Velocity.Mixfile do
   defp package do
     [
       name: "velocity",
-      files: ~w(),
       licenses: ["MIT"],
       links: %{"GitHub" => "https://github.com/wildstrings/velocity"}
     ]
