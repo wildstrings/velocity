@@ -43,19 +43,19 @@ Velocity.register({:some, "event", [%{metadata: 42}]})
 Get event count for the default period in the past:
 ```elixir
 Velocity.of(:foo)
-#=> 2
+#=> {:ok, 2}
 ```
 
 Get event count for the last 60 seconds:
 ```elixir
 Velocity.of(:bar, 60)
-#=> 1
+#=> {:ok, 1}
 ```
 
 The same using a shorthand:
 ```elixir
 Velocity.of(:bar, :minute)
-#=> 1
+#=> {:ok, 1}
 ```
 
 ### License
