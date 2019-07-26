@@ -1,6 +1,6 @@
 # Velocity
 
-A simple `Agent`-based library for registering events and reporting event occurrence count for the given time period.
+A simple `Agent`-based Elixir library for registering events and reporting event occurrence count for the given time period.
 
 ## Installation
 
