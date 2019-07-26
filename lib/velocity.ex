@@ -16,29 +16,29 @@ defmodule Velocity do
     Velocity.register(:foo)
 
     Velocity.of(:foo)
-    #=> 2
+    #=> {:ok, 2}
 
     Velocity.of(:foo, :minute)
-    #=> 2
+    #=> {:ok, 2}
 
     Velocity.of(:bar, :minute)
-    #=> 1
+    #=> {:ok, 1}
 
     Velocity.of(:baz, :minute)
-    #=> 0
+    #=> {:ok, 0}
 
     #...after 2 minutes...
     Velocity.of(:foo, :minute)
-    #=> 0
+    #=> {:ok, 0}
 
     Velocity.of(:foo, 5 * 60)
-    #=> 2
+    #=> {:ok, 2}
 
     #...after 3 minutes...
     Velocity.of(:foo, 5 * 60)
-    #=> 0
+    #=> {:ok, 0}
 
-  TODO: implement subscribable alerts, e.g. Velocity.alert(self(), :ato, {:gt: 10, :minute})
+  TODO: implement subscribable alerts, e.g. Velocity.alert(self(), :ato, {{:gt, 10}, :minute})
   """
 
   use Agent
@@ -91,7 +91,7 @@ defmodule Velocity do
   @doc """
   Reports the number of events registered within the last X seconds. Pre-defined constants such as :minute or :hour may be used.
   """
-  @spec of(any(), integer() | atom()) :: integer()
+  @spec of(any(), integer() | atom()) :: {:ok, integer()} | {:error, atom()}
   def of(event, period) when period in @time_period_keys,
     do: of(event, @time_periods[period])
 
@@ -106,15 +106,18 @@ defmodule Velocity do
     Agent.get(__MODULE__, fn %{config: %{ttl: ttl}, events: events} ->
       now = now()
 
-      case events do
-        %{^event => points} ->
-          points
-          |> Enum.take_while(&(&1 > now - min(period, ttl)))
-          |> Enum.count()
+      count =
+        case events do
+          %{^event => points} ->
+            points
+            |> Enum.take_while(&(&1 > now - min(period, ttl)))
+            |> Enum.count()
 
-        _ ->
-          0
-      end
+          _ ->
+            0
+        end
+
+      {:ok, count}
     end)
   end
 
