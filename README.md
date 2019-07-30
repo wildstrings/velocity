@@ -58,6 +58,10 @@ Velocity.of(:bar, :minute)
 #=> {:ok, 1}
 ```
 
+### TODO
+
+Implement subscribable alerts when an event's frequency hits a specified threshold.
+
 ### License
 
 MIT License

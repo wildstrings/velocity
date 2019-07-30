@@ -39,7 +39,6 @@ defmodule Velocity do
       Velocity.of(:foo, 5 * 60)
       #=> {:ok, 0}
 
-  TODO: implement subscribable alerts, e.g. Velocity.alert(self(), :ato, {{:gt, 10}, :minute})
   """
 
   use Agent
